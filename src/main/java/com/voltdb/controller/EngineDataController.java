@@ -22,25 +22,58 @@ public class EngineDataController {
 	
     @RequestMapping(value = "/select")
     @ResponseBody
-	public String selectEngineData(String tableName,String tractorId) throws NoConnectionsException, IOException{
+	public String selectEngineData(String tableName,String tractorId){
     	
         if((tableName == null || tableName.isEmpty())&&(tractorId == null || tractorId.isEmpty())) {
     	tableName = "tb_engine_data";
          tractorId = "'777'";
          }
         
-        client.callProcedure(new SearchDataCallback(),"@AdHoc", "SELECT * FROM " + tableName+" WHERE tractor_id= "+tractorId);
+        try {
+			client.callProcedure(new SearchDataCallback(),"@AdHoc", "SELECT * FROM " + tableName+" WHERE tractor_id= "+tractorId);
+		} catch (NoConnectionsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return "HELLO WORLD!";
     }
     
     @RequestMapping(value = "/insert")
     @ResponseBody
-	public String insertEngineData(String tableName,String tractorId) throws NoConnectionsException, IOException{
+	public String insertEngineData(String tableName,String tractorId){
     	       
         // Get the alerts
-        client.callProcedure(new EngineDataCallback(),
-                                 "LoadEngineData",
-                                 "862952026635317", "777", 80,100,100,100,80,80,15);
+        try {
+			client.callProcedure(new EngineDataCallback(),
+			                         "LoadEngineData",
+			                         "862952026635317", "777", 80,100,100,100,80,80,15);
+		} catch (NoConnectionsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "HELLO WORLD!";
+    }
+    
+    @RequestMapping(value = "/FindLastEngineData")
+    @ResponseBody
+	public String findLastEngineData(String tractorId){
+    	
+        if(tractorId == null || tractorId.isEmpty()) {
+         tractorId = "6";
+         }
+        
+        try {
+			client.callProcedure(new SearchDataCallback(),"FindLastEngineData",tractorId );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return "HELLO WORLD!";
     }
 
