@@ -43,13 +43,13 @@ public class EngineDataController {
     
     @RequestMapping(value = "/insert")
     @ResponseBody
-	public String insertEngineData(String tableName,String tractorId){
+	public String insertEngineData(){
     	       
         // Get the alerts
         try {
 			client.callProcedure(new EngineDataCallback(),
-			                         "LoadEngineData",
-			                         "862952026635317", "777", 80,100,100,100,80,80,15);
+			                         "TB_ENGINE_DATA.insert",
+			                         "862952026635317", "777", 80,100,100,100,80,80,15,new Timestamp(System.currentTimeMillis()));
 		} catch (NoConnectionsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,12 +60,12 @@ public class EngineDataController {
         return "HELLO WORLD!";
     }
     
-    @RequestMapping(value = "/FindLastEngineData")
+    @RequestMapping(value = "/findLastEngineData")
     @ResponseBody
-	public String findLastEngineData(String tractorId){
+	public String FindLastEngineData(String tractorId){
     	
         if(tractorId == null || tractorId.isEmpty()) {
-         tractorId = "6";
+         tractorId = "777";
          }
         
         try {

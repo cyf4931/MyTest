@@ -8,7 +8,8 @@ CREATE TABLE tb_engine_data (
   coolant_temp INTEGER ,
   engine_online_hour FLOAT,
   pedal_position FLOAT,
-  time_stamp TIMESTAMP,
+  time_stamp TIMESTAMP NOT NULL,
+  PRIMARY KEY (tractor_id,time_stamp)
 );
 
 PARTITION TABLE tb_engine_data ON COLUMN tractor_id;
