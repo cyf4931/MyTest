@@ -3,9 +3,20 @@
    <cluster hostcount="3" kfactor="0" />
    <security enabled="true"/>
     <users>
-        <user name="admin" password="123456" roles="ops,administrator" />
+        <user name="admin" password="123456" roles="administrator" />
     </users>
    <httpd enabled="true">
       <jsonapi enabled="true" />
    </httpd>
+   <export>
+       <configuration enabled="true" type="jdbc" target="archive">
+           <property name="jdbcurl">jdbc:mysql://10.170.7.73:3306/tractordb_archive</property>
+           <property name="jdbcuser">root</property>
+           <property name="jdbcpassword">root</property>
+           <property name="jdbcdriver">com.mysql.jdbc.Driver</property>
+           <property name="createtable">false</property>
+           <property name="skipinternals">true</property>
+           <property name="lowercase">true</property>
+       </configuration>
+   </export>
 </deployment>

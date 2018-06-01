@@ -18,7 +18,7 @@ public class DBConfig {
 		//自动连接集群中所有节点
 		config.setTopologyChangeAware(true);
 		client = ClientFactory.createClient(config);
-        client.createConnection("10.170.7.22");
+        client.createConnection("10.170.7.21");
         return client;
 	}
 

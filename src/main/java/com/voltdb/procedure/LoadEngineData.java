@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class LoadEngineData extends VoltProcedure {
 
   public final SQLStmt InsertEngineData = new SQLStmt(
-      " INSERT INTO tb_engine_data VALUES (?,?,?,?,?,?,?,?,?,?);");
+      " INSERT INTO cache_engine_data VALUES (?,?,?,?,?,?,?,?,?,?);");
 
   public VoltTable[] run(String drc_id,
                          String tractor_id,
