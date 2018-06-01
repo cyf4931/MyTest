@@ -32,12 +32,27 @@ public class EngineDataController {
 	public String selectEngineData(String tableName,String tractorId){
     	
         if((tableName == null || tableName.isEmpty())&&(tractorId == null || tractorId.isEmpty())) {
-    	tableName = "tb_engine_data";
+    	tableName = "cache_engine_data";
          tractorId = "'777'";
          }
         
         try {
 			client.callProcedure(new SearchDataCallback(),"@AdHoc", "SELECT * FROM " + tableName+" WHERE tractor_id= "+tractorId);
+		} catch (NoConnectionsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "HELLO WORLD!";
+    }
+    
+    @RequestMapping(value = "/selectAll")
+    @ResponseBody
+	public String selectAllEngineData(){
+        try {
+			client.callProcedure(new SearchDataCallback(),"@AdHoc", "select * from cache_engine_data where tractor_id='100'");
 		} catch (NoConnectionsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +82,7 @@ public class EngineDataController {
         return "HELLO WORLD!";
     }
     
-    @RequestMapping(value = "/insertTest")
+    @RequestMapping(value = "/jdbcTest")
     @ResponseBody
 	public String insertTest() throws ProcCallException{
     	for(int i=1;i<=1000000;i++) {
@@ -86,7 +101,7 @@ public class EngineDataController {
         return "HELLO WORLD!";
     }
     
-    @RequestMapping(value = "/insertTest2")
+    @RequestMapping(value = "/insertTest")
     @ResponseBody
 	public String insertTest2() throws ProcCallException{
     	for(int i=1;i<=1000000;i++) {
@@ -136,8 +151,8 @@ public class EngineDataController {
             		timing(start,end);
                 	}            	
              }else {
-            	 System.out.println("插入数据失败!");
             	 System.out.println(response.getStatus());
+            	 System.out.println("插入数据失败!");
              }
         }
     }
