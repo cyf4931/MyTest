@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -123,10 +124,13 @@ public class EngineDataController {
     @RequestMapping(value = "/insertTest")
     @ResponseBody
 	public String insertTest2() throws ProcCallException{
+    	Calendar calendar = Calendar.getInstance();//此时打印它获取的是系统当前时间
+        calendar.add(Calendar.DATE, -8);    //得到前一天
+    	
     	for(int i=1;i<=1000000;i++) {
     	// Get the alerts
         try {
-        	client.callProcedure(new EngineDataCallback(),"CACHE_ENGINE_DATA.insert","862952026635317",String.valueOf(i),80,100,100,100,80,80,15,new Timestamp(System.currentTimeMillis()));
+        	client.callProcedure(new EngineDataCallback(),"CACHE_ENGINE_DATA.insert","862952026635317",String.valueOf(i),80,100,100,100,80,80,15,new Timestamp(calendar.getTime().getTime()));
         	//client.callProcedure(new EngineDataCallback(),"TEST.insert",i, i);
 		} catch (NoConnectionsException e) {
 			// TODO Auto-generated catch block

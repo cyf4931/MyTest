@@ -33,3 +33,4 @@ LOAD CLASSES tractor.jar;
 
 CREATE PROCEDURE PARTITION ON TABLE cache_engine_data COLUMN tractor_id FROM CLASS FindLastEngineData;
 CREATE PROCEDURE FROM CLASS ArchiveEngineData;
+CREATE PROCEDURE FROM CLASS CleanEngineData;

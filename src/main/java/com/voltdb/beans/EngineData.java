@@ -3,6 +3,7 @@ package com.voltdb.beans;
 import java.sql.Timestamp;
 
 public class EngineData {
+	
 	private String drcId;
 	private String tractorId;
 	private int torque;

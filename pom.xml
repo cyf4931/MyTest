@@ -37,11 +37,18 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.voltdb/voltdbclient -->
-<dependency>
-    <groupId>org.voltdb</groupId>
-    <artifactId>voltdbclient</artifactId>
-    <version>8.0</version>
-</dependency>
+		<dependency>
+		    <groupId>org.voltdb</groupId>
+		    <artifactId>voltdbclient</artifactId>
+		    <version>8.0</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+        </dependency>
+		
 	</dependencies>
 
 	<build>

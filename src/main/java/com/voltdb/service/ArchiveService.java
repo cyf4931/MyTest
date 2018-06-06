@@ -8,6 +8,7 @@ import org.voltdb.client.Client;
 import org.voltdb.client.NoConnectionsException;
 
 import com.voltdb.scheduleTask.ArchiveDataCallback;
+import com.voltdb.scheduleTask.CleanDataCallback;
 
 @Service
 public class ArchiveService {
@@ -29,8 +30,15 @@ public class ArchiveService {
 		}
 	}
 	
-	public void cleanData() {
+	public void cleanData(String start,String end) {
 		System.out.println("开始清理七天前数据");
+		
+		try {
+			client.callProcedure(new CleanDataCallback(),"CleanEngineData",start,end);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
