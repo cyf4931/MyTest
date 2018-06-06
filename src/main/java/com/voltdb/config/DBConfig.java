@@ -13,12 +13,18 @@ import org.voltdb.client.ClientFactory;
 public class DBConfig {
 	@Bean
 	public Client getClient() throws UnknownHostException, IOException {
+		String hostNames="10.170.7.21,10.170.7.22,10.170.7.23";
 		Client client;
 		ClientConfig config = new ClientConfig("admin","123456");
 		//自动连接集群中所有节点
 		config.setTopologyChangeAware(true);
+		
+		String[] hostArray = hostNames.split(",");
 		client = ClientFactory.createClient(config);
-        client.createConnection("10.170.7.21");
+        for(String host:hostArray) {
+		client.createConnection(host);
+		System.out.println(host);
+		}
         return client;
 	}
 

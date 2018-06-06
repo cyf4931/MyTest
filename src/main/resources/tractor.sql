@@ -13,7 +13,7 @@ CREATE TABLE cache_engine_data (
 );
 
 CREATE STREAM tb_engine_data
-EXPORT TO TARGET archive (  
+EXPORT TO TARGET archive PARTITION ON COLUMN tractor_id(  
 drc_id varchar(25) NOT NULL,
   tractor_id varchar(25) NOT NULL,
   torque INTEGER,
@@ -32,3 +32,4 @@ CREATE INDEX engine_idx ON cache_engine_data (time_stamp);
 LOAD CLASSES tractor.jar;
 
 CREATE PROCEDURE PARTITION ON TABLE cache_engine_data COLUMN tractor_id FROM CLASS FindLastEngineData;
+CREATE PROCEDURE FROM CLASS ArchiveEngineData;

@@ -6,6 +6,8 @@ import com.voltdb.beans.EngineData;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
@@ -72,6 +74,23 @@ public class EngineDataController {
 			client.callProcedure(new InsertDataCallback(),
 			                         "TB_ENGINE_DATA.insert",
 			                         "862952026635317", "777", 80,100,100,100,80,80,15,new Timestamp(System.currentTimeMillis()));
+		} catch (NoConnectionsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "HELLO WORLD!";
+    }
+    
+    @RequestMapping(value = "/archive")
+    @ResponseBody
+	public String archiveEngineData() throws ParseException{
+    	String start="2018-06-01 00:00:00";
+        String end="2018-06-02 00:00:00";			
+			try {
+			client.callProcedure(new InsertDataCallback(),"ArchiveEngineData",start,end);
 		} catch (NoConnectionsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
